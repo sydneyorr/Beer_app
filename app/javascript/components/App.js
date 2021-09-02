@@ -27,9 +27,20 @@ const App = () => {
 
   const deleteBeer = async (id) => {
     try {
-    axios.delete(`beers/${id}`)
-
+    await axios.delete(`beers/${id}`)
+    const newBeers = beers.filter((beer)=> beer.id !== id)
+    setBeers(newBeers)
     } catch {
+
+    }
+  }
+
+  const updateBeer = async (beer) => {
+    try {
+      let res = await axios.put(`/beers/${beer.id}`, beer);
+      let newBeers = beers.map((b)=>(b.id === beer.id ? beer : b ));
+      setBeers(newBeers);
+    } catch (err) {
 
     }
   }
@@ -43,7 +54,7 @@ const App = () => {
       <button onClick={()=>setShowForm(!showForm)}>{showForm ? "hide form" : "new beer form"}</button>
       {showForm && <BeerForm addBeer={addBeer}/>}
       <button onClick={getBeers}>Get Beers</button>
-      <Beers beers={beers}/>
+      <Beers beers={beers} deleteBeer={deleteBeer} updateBeer={updateBeer} />
     </div>
   );
 };

@@ -23,6 +23,13 @@ class BeersController < ApplicationController
   render json: @beer.destroy
  end
 
+ def update
+  @beer = Beer.find(params[:id])
+  if(@beer.update(beers_params))
+    render json: @beer
+  else
+  end
+ end
 
  private
 

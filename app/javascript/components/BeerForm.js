@@ -5,7 +5,7 @@ const BeerForm = (props) => {
 
 const handleSubmit = (e) => {
   e.preventDefault();
-  props.addBeerProp({ name });
+  props.addBeer({ name });
   setName("");
 };
 
@@ -27,5 +27,5 @@ const handleSubmit = (e) => {
   );
 };
 
-export default BeerForm
+export default BeerForm;
 
